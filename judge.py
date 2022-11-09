@@ -24,7 +24,6 @@ def judge(no,maxTime=1):
         err="Time limit exceeded"
     deltaTime=time()-startedTime
     result=outs
-    err=err.decode(encoding="UTF-8")
 
     f=open("tests/"+str(no)+"/o.txt","r")
     output=f.read()+"\n"

@@ -1,6 +1,8 @@
 import judge
 import os
 import shutil
+import random
+import string
 
 def test(file="main.cpp"):
     judge.compile(file)
@@ -38,13 +40,18 @@ def addTestCase():
     print("Successfully added the test case.")
 
 def removeTestCases():
+    text=str(''.join(random.choice(string.ascii_letters) for i in range(10)))
     warning=input("Are you sure you want to continue? THIS ACTION CANNOT BE UNDONE. (Y/N)\n> ")
-    if warning=="Y":  
-        tests=os.listdir("tests")
-        for i in range(len(tests)):
-            path="tests/"+str(i+1)
-            shutil.rmtree(path)
-        print("Removed all test cases.")
+    if warning=="Y":
+        confirm=input("Type the following text to confirm: "+text+"\n> ")
+        if confirm==text:
+            tests=os.listdir("tests")
+            for i in range(len(tests)):
+                path="tests/"+str(i+1)
+                shutil.rmtree(path)
+            print("Removed all test cases.")
+        else:
+            print("Incorrect text.")
     else:
         print("Cancelled.")
 
