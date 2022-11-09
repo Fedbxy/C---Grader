@@ -4,7 +4,6 @@ import shutil
 
 def test(file="main.cpp"):
     judge.compile(file)
-
     tests=os.listdir("tests")
 
     total_time=0
@@ -23,6 +22,7 @@ def test(file="main.cpp"):
     total_score="{:.2f}".format(total_score)
     print("Score: "+str(total_score)+"/100.00")
     print("Time: "+str(int(total_time))+"ms")
+    os.remove("files/c++")
 
 def addTestCase():
     tests=os.listdir("tests")
