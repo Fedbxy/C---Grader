@@ -7,24 +7,21 @@ def test(file="main.cpp"):
 
     tests=os.listdir("tests")
 
-    total_time=0.0
-    total_score=0.0
+    total_time=0
+    total_score=0
     score=100/len(tests)
 
     for i in range(len(tests)):
         values=judge.judge(i+1).split("|")
         result=values[0]
         time=values[1]
-        print("#"+str(i+1)+": "+str(result)+" ("+str(int(float(time)*1000))+"ms)")
+        print("#"+str(i+1)+": "+str(result)+" ("+str(round(float(time)*1000))+"ms)")
         if result=="PASS":
             total_score+=score
         total_time+=round(float(time)*1000)
 
-    if total_score.is_integer():
-        total_score=int(total_score)
-    else:
-        total_score="{:.2f}".format(total_score)
-    print("Score: "+str(total_score)+"/100")
+    total_score="{:.2f}".format(total_score)
+    print("Score: "+str(total_score)+"/100.00")
     print("Time: "+str(int(total_time))+"ms")
 
 def addTestCase():
