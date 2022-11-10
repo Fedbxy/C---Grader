@@ -16,9 +16,11 @@ def test(file="main.cpp"):
         values=judge.judge(i+1).split("|")
         result=values[0]
         time=values[1]
-        print("#"+str(i+1)+": "+str(result)+" ("+str(round(float(time)*1000))+"ms)")
+        st_score=0.0
         if result=="PASS":
             total_score+=score
+            st_score=score
+        print("#"+str(i+1)+": "+str(result)+" ["+str("{:.2f}".format(st_score))+"/"+str("{:.2f}".format(score))+"] ("+str(round(float(time)*1000))+"ms)")
         total_time+=round(float(time)*1000)
 
     total_score="{:.2f}".format(total_score)
