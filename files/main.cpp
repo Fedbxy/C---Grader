@@ -2,30 +2,27 @@
 
 using namespace std;
 
+bool isPrime(long long int x){
+    if(x<=1){
+        return 0;
+    }
+    for(long long int i=2;i<x;i++){ // The solution is i<=sqrt(x)
+        if(x%i==0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int main(){
-    ios::sync_with_stdio(false);cin.tie(0);
-    int m,n;cin>>m>>n;
-    int k;cin>>k;
-    int a[m][n];
-    for(int i=0;i<m;i++){
-        for(int j=0;j<n;j++){
-            cin>>a[i][j];
-        }
+    ios::sync_with_stdio(false); cin.tie(0);
+    long long int x;
+    cin>>x;
+    if(isPrime(x)){
+        cout<<"Yes"<<endl;
+    }else{
+        cout<<"No"<<endl;
     }
-    int mx=INT_MIN;
-    for(int i=0;i<m-k+1;i++){
-        for(int j=0;j<n-k+1;j++){
-            int sum=0;
-            for(int p=i;p<i+k;p++){
-                for(int q=j;q<j+k;q++){
-                    sum+=a[p][q];
-                }
-            }
-            if(sum>mx){
-                mx=sum;
-            }
-        }
-    }
-    cout<<mx<<"\n";
+
     return 0;
 }
