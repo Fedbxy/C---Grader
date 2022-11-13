@@ -3,8 +3,11 @@ from subprocess import PIPE
 from time import time
 
 def compile(fileName):
-    subprocess.run(["g++","-std=c++11","-O2","-Wall","./files/"+fileName,"-o","./files/c++"])
-
+    c=subprocess.run(["g++","-std=c++11","-O2","-Wall","./files/"+fileName,"-o","./files/c++"],capture_output=True)
+    if c.returncode==0:
+        return True
+    else:
+        return False
 
 def judge(no,maxTime=1):
     p=subprocess.Popen(["files/c++"],shell=True,stdout=PIPE,stdin=PIPE,stderr=PIPE)
@@ -30,9 +33,9 @@ def judge(no,maxTime=1):
     output=bytes(output,"UTF-8")
     f.close()
 
-    if result==output:
+    if result.strip()==output.strip():
         return "PASS"+"|"+str(deltaTime)
     else:
         if err:
-            return err+"|"+str(deltaTime)
+            return str(err)+"|"+str(deltaTime)
         return "FAILED"+"|"+str(deltaTime)
