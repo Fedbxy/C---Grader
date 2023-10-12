@@ -10,7 +10,7 @@ def compile(fileName):
         return False
 
 def judge(no, maxTime = 1):
-    p = subprocess.Popen(["files/c++"], shell = True, stdout = PIPE, stdin = PIPE, stderr = PIPE)
+    p = subprocess.Popen(["files/c++"], stdout = PIPE, stdin = PIPE, stderr = PIPE)
 
     f = open("tests/"+str(no)+"/i.txt", "r")
     input = f.read()
