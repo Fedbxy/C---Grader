@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/monaco-editor@0.44.0/min/vs/editor/editor.main.css">
+    <title>Submit Code</title>
+</head>
+
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-500 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">OCOM Bruh</h1>
+            <div>
+                <a href="/" class="mx-2 hover:underline">View Problems</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8 flex-1">
+
+        <div class="bg-white p-8 rounded-md shadow-md w-full mb-8">
+            <h1 class="text-3xl font-bold mb-4 text-center">Submit Code</h1>
+            
+            <div class="mb-4">
+                <label for="language" class="block text-sm font-medium text-gray-700">Select Language:</label>
+                <select id="language" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <option value="c">C</option>
+                    <option value="cpp">C++</option>
+                    <option value="py">Python</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <label for="problem" class="block text-sm font-medium text-gray-700">Select Problem:</label>
+                <select id="problem" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <!-- Problems will be dynamically added here -->
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="selection" class="block text-sm font-medium text-gray-700">Select Input Type:</label>
+                <select id="selection" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" onchange="toggleInputType()">
+                    <option value="code">Code Editor</option>
+                    <option value="file">File Upload</option>
+                </select>
+            </div>
+
+            <div id="codeEditor" class="mb-4">
+                <div id="code" class="w-full border border-gray-300 rounded-md mb-4 overflow-hidden h-[calc(100vh-150px)]"></div>
+            </div>
+
+            <div id="fileUpload" class="mb-4 hidden">
+                <label for="file" class="block text-sm font-medium text-gray-700">Upload File:</label>
+                <input type="file" id="file" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" onchange="handleFileSelect()">
+            </div>
+            
+            <div id="loading-overlay" class="hidden mt-4">
+                <div class="spinner"></div>
+            </div>
+
+            <button id="submitBtn" onclick="submitCode()" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 w-full">Submit</button>
+
+            <div id="result" class="mt-4 p-4 border border-gray-300 rounded-md bg-gray-50 hidden"></div>
+        </div>
+
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Submission Guidelines</h2>
+            <p class="mb-4">Follow these guidelines to ensure a successful code submission:</p>
+            <ul class="list-disc pl-6">
+                <li>Choose the correct programming language for your code.</li>
+                <li>Select the problem you are solving from the dropdown list.</li>
+                <li>If using the Code Editor, write your code in the provided space. If using File Upload, submit your code as a file.</li>
+                <li>Click the "Submit" button to submit your code for grading.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 class="text-xl font-semibold mb-4">Need Help?</h2>
+            <p class="mb-4">
+                If you encounter any issues or have questions, feel free to contact our support team at <a href="mailto:support@fedbxy.com" class="text-blue-500 hover:underline">support@fedbxy.com</a>.<br>
+                Happy coding!
+            </p>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4">
+        <p>&copy; 2023 OCOM Bruh. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <script src="script.js"></script>
+    <script src="codeeditor.js"></script>
+
+</body>
+
+</html>
