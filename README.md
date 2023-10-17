@@ -1,2 +1,2 @@
 # Grader
-The repository for my C++ program grader written in Python.
+The repository for my web app grader.
