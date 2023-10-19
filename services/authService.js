@@ -48,6 +48,14 @@ const generateToken = (user) => {
 const registerUser = async ({ displayName, username, password }) => {
     const users = await readDatabase(usersFilePath);
 
+    if (displayName.length < 1 || displayName.length > 60) {
+        throw new Error('Display name must be between 1 and 60 characters.');
+    }
+
+    if (username.length < 3 || username.length > 30) {
+        throw new Error('Username must be between 3 and 30 characters.');
+    }
+
     if (users.find(user => user.username === username)) {
         throw new Error('Username already exists');
     }
