@@ -10,34 +10,17 @@
 
 <body class="flex flex-col min-h-screen bg-gray-100">
 
-   <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="bg-blue-500 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold">OCOM Bruh</h1>
-            <div class="hidden lg:flex space-x-4" id="navbar-links">
+            <div class="flex space-x-4" id="navbar-links">
                 <a href="/submit" class="hover:underline" id="submitLink">Submit Code</a>
                 <a href="/submission" class="hover:underline" id="submissionLink">Submissions</a>
                 <a href="/login" class="hover:underline" id="loginLink">Login</a>
             </div>
-            <!-- Hamburger Icon -->
-            <div class="block lg:hidden" id="mobile-menu">
-                <button class="text-white hover:text-gray-300 focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
         </div>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div class="hidden lg:hidden" id="mobile-menu">
-        <a href="/submit" class="block py-2 px-4 text-sm hover:bg-gray-300">Submit Code</a>
-        <a href="/submission" class="block py-2 px-4 text-sm hover:bg-gray-300">Submissions</a>
-        <a href="/login" class="block py-2 px-4 text-sm hover:bg-gray-300">Login</a>
-    </div>
 
     <!-- Main Content -->
     <div class="container mx-auto p-8 flex-1">

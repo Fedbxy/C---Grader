@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    // Handle specific errors with different responses
+
     if (err.name === 'UnauthorizedError') {
         res.status(401).send('Unauthorized');
     } else {

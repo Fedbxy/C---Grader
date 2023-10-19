@@ -91,21 +91,17 @@ function authenticateToken(req, res, next) {
 
 function getUserData(userID) {
     const users = readDatabase(usersFilePath);
-    
-    // Find the user with the given userID
+
     const user = users.find(user => user.userID === userID);
 
-    // Check if the user was found
     if (!user) {
         throw new Error('User not found');
     }
 
-    // You can return whatever data you want here, depending on your requirements
     return {
         userID: user.userID,
         displayName: user.displayName,
         username: user.username
-        // Add more fields as needed
     };
 }
 
