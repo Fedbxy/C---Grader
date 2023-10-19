@@ -1,4 +1,3 @@
-// submissionScript.js
 async function fetchSubmissions() {
     try {
       const response = await fetch('/api/submission');

@@ -1,4 +1,3 @@
-// Function to send registration data to the server
 function registerUser(displayName, username, password) {
     var serverRegisterEndpoint = '/register';
 
@@ -11,7 +10,6 @@ function registerUser(displayName, username, password) {
     sendToServer(serverRegisterEndpoint, registrationData, 'Registration');
 }
 
-// Function to send login data to the server
 function loginUser(username, password) {
     var serverLoginEndpoint = '/login';
 
@@ -38,7 +36,6 @@ function logout() {
     });
 }
 
-// Function to send data to the server
 function sendToServer(endpoint, data, action) {
     fetch(endpoint, {
         method: 'POST',
@@ -69,7 +66,6 @@ function sendToServer(endpoint, data, action) {
     });
 }
 
-// Function to validate the registration form
 function validateRegisterForm() {
     var displayName = document.getElementById('displayName').value;
     var username = document.getElementById('username').value;
@@ -97,14 +93,11 @@ function validateRegisterForm() {
 
     clearError();
 
-    // If all validations pass, send data to the server for registration
     registerUser(displayName, username, password);
 
-    // Prevent the form from submitting (since we're handling it with fetch)
     return false;
 }
 
-// Function to validate the login form
 function validateLoginForm() {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
@@ -121,26 +114,21 @@ function validateLoginForm() {
 
     clearError();
 
-    // If all validations pass, send data to the server for login
     loginUser(username, password);
 
-    // Prevent the form from submitting (since we're handling it with fetch)
     return false;
 }
 
-// Function to show an error message
 function showError(message) {
     var errorMessageElement = document.getElementById('error-message');
     errorMessageElement.textContent = message;
 }
 
-// Function to clear any previous error messages
 function clearError() {
     var errorMessageElement = document.getElementById('error-message');
     errorMessageElement.textContent = '';
 }
 
-// Function to update the navbar based on the user's authentication status
 function updateNavbar() {
     const submitLink = document.getElementById('submitLink');
     const submissionLink = document.getElementById('submissionLink');
