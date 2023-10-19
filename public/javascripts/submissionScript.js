@@ -29,6 +29,8 @@ async function displaySubmissions() {
 
       tableBody.appendChild(row);
   });
+
+  sortTable();
 }
 
 function showSubmissionDetails(data) {
@@ -57,6 +59,33 @@ function showSubmissionDetails(data) {
 function closeSubmissionDetails() {
     document.getElementById("submissionDetails").classList.remove('opacity-100', 'scale-100');
     document.getElementById("submissionDetails").classList.add('opacity-0', 'scale-0');
+}
+
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("submissionTable");
+  switching = true;
+
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false;
+      x = parseFloat(rows[i].cells[0].innerHTML.toLowerCase());
+      y = parseFloat(rows[i + 1].cells[0].innerHTML.toLowerCase());
+
+      if (x < y) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
 }
 
 window.onload = displaySubmissions;
