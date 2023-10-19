@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { secretKey } = require('./authService');
+const jwt = require('jsonwebtoken');
 
 const queue = [];
 let isProcessingQueue = false;
-const dataPath = 'grader/data.json';
+const dataPath = 'data/count.json';
 
 function readDatabase() {
     try {
@@ -67,6 +69,19 @@ const processSubmission = (req, res, dir, callback) => {
             return;
         }
 
+        const token = req.cookies.authToken;
+        if (!token) {
+            return res.redirect('/login');
+        }
+
+        jwt.verify(token, secretKey, (err, decoded) => {
+            if (err) {
+                return res.redirect('/login');
+            }
+    
+            req.user = decoded;
+        });
+
         fs.mkdir(dir, { recursive: true }, (err) => {
             if (err) {
                 reject(`Error creating directory: ${err.message}`);
@@ -100,6 +115,7 @@ const processSubmission = (req, res, dir, callback) => {
 
                         const resultData = JSON.parse(data.toString());
                         resultData.submission_date = submit_epoch;
+                        resultData.userID = req.user.userID;
 
                         fs.writeFile(path.join(dir, 'result.json'), JSON.stringify(resultData), (err) => {
                             if (err) {

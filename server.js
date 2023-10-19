@@ -1,22 +1,33 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { exec } = require('child_process');
-const fs = require('fs');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+
 const { getNextSubmissionId, processQueue, queue } = require('./services/submissionService');
+const { authenticateToken } = require('./services/authService');
+const authRoutes = require('./routes/authRoute');
+const apiRoutes = require('./routes/apiRoute');
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'public'), {extensions: 'html'}));
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
 });
 
-app.post('/submit', (req, res) => {
+app.use('/api', apiRoutes);
+app.use(authRoutes);
+app.use(express.static(path.join(__dirname, 'public'), {extensions: 'html'}));
+
+app.get('/submit', authenticateToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'private', 'submit.html'));;
+});
+
+app.post('/submit', authenticateToken, (req, res) => {
     const submissionId = getNextSubmissionId();
     const dir = `grader/submission/${submissionId}`;
 
@@ -25,42 +36,18 @@ app.post('/submit', (req, res) => {
     processQueue();
 });
 
-app.get('/problem', async (req, res) => {
-    const problemPath = path.join(__dirname, 'public', 'problem');
-
-    try {
-        const files = await fs.promises.readdir(problemPath);
-
-        const jsonFiles = files.filter(file => file.endsWith('.json'));
-
-        const problem = await Promise.all(jsonFiles.map(async file => {
-            try {
-                const content = await fs.promises.readFile(path.join(problemPath, file), 'utf-8');
-                const { name, time_limit, memory_limit } = JSON.parse(content);
-
-                return {
-                    title: name,
-                    time_limit,
-                    memory_limit,
-                    filename: file
-                };
-            } catch (error) {
-                console.error(`Error reading or parsing JSON file "${file}":`, error);
-                return null;
-            }
-        }));
-
-        const validproblem = problem.filter(problem => problem !== null);
-
-        res.json(validproblem);
-    } catch (error) {
-        console.error('Error reading "problem" directory:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
 app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+});
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    // Handle specific errors with different responses
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send('Unauthorized');
+    } else {
+        res.status(500).send('Something went wrong!');
+    }
 });
 
 app.listen(port, () => {
