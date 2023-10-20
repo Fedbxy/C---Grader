@@ -16,6 +16,11 @@ async function displaySubmissions() {
       const row = document.createElement('tr');
       row.classList.add('hover:bg-gray-100', 'cursor-pointer');
       row.onclick = () => showSubmissionDetails(submission);
+      console.log(submission);
+      if (submission['score'] === 1) {
+        row.classList.remove('hover:bg-gray-100');
+        row.classList.add('bg-green-200', 'hover:bg-green-300');
+      }
 
       const columns = ['submission', 'displayName', 'title', 'score', 'time'];
       columns.forEach((column) => {
