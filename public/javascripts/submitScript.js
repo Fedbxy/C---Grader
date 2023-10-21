@@ -7,6 +7,10 @@ async function submitCode() {
 
     if (selection === 'code') {
         code = codeEditor.getValue();
+        if (!code) {
+            setResult('Cannot submit empty code.', true);
+            return;
+        }
         var fileExtension = language;
         submitToServer(code, language, problem, Date.now(), fileExtension);
     } else if (selection === 'file') {
@@ -120,11 +124,13 @@ function disableSubmitBtn(bool, newText) {
 }
 
 function setResult(message, isError) {
-    document.getElementById('result').innerHTML = message;
+    const result = document.getElementById('result');
+    result.classList.remove("hidden");
+    result.innerHTML = message;
     if (isError) {
-        document.getElementById('result').classList.add("text-red-500");
+        result.classList.add("text-red-500");
     } else {
-        document.getElementById('result').classList.remove("text-red-500");
+        result.classList.remove("text-red-500");
     }
 }
 

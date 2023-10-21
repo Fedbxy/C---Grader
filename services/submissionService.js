@@ -30,7 +30,11 @@ const processQueue = async () => {
 
     while (queue.length > 0) {
         const { req, res, dir } = queue.shift();
-        await processSubmission(req, res, dir);
+        try {
+            await processSubmission(req, res, dir);
+        } catch (err) {
+            console.log(`Error processing submission: ${err}`);
+        }
     }
 
     isProcessingQueue = false;
