@@ -56,7 +56,7 @@ const registerUser = async ({ displayName, username, password }) => {
         throw new Error('Username must be between 3 and 30 characters.');
     }
 
-    if (users.find(user => user.username === username)) {
+    if (users.find(user => user.username.toLowerCase() === username.toLowerCase())) {
         throw new Error('Username already exists');
     }
 
