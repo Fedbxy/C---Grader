@@ -75,12 +75,16 @@ const processSubmission = (req, res, dir, callback) => {
 
         const token = req.cookies.authToken;
         if (!token) {
-            return res.redirect('/login');
+            reject('You are not logged in.');
+            res.status(400).json({ error: 'You are not logged in.' });
+            return;
         }
 
         jwt.verify(token, secretKey, (err, decoded) => {
             if (err) {
-                return res.redirect('/login');
+                reject('Invalid token. Please try logging out and login again.');
+                res.status(400).json({ error: 'Invalid token. Please try logging out and login again.' });
+                return;
             }
     
             req.user = decoded;
