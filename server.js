@@ -28,7 +28,7 @@ app.get('/submit', authenticateToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'private', 'submit.html'));;
 });
 
-app.post('/submit', authenticateToken, (req, res) => {
+app.post('/submit', (req, res) => {
     const submissionId = getNextSubmissionId();
     const dir = `grader/submission/${submissionId}`;
 
