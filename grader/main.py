@@ -41,6 +41,11 @@ def run_code(code_file, input_file, timeout, memory_limit, language):
     except subprocess.CalledProcessError as e:
         process.terminate()
         return 1, "", "Runtime Error", execution_time, memory_usage
+    
+def normalize_output(output):
+    lines = output.split('\n')
+    normalized_lines = [line.rstrip() for line in lines]
+    return '\n'.join(normalized_lines)
 
 def grade_submission(submission_info):
     result = ""
@@ -70,12 +75,11 @@ def grade_submission(submission_info):
 
             return_code, output, error, execution_time, memory_usage = run_code(code_file, input_file, config["time_limit"], config["memory_limit"], language)
 
-            expected_output = expected_output_file.read().strip()
-            print(memory_usage)
             total_time += execution_time
             total_mem += memory_usage
+            expected_output = normalize_output(expected_output_file.read())
 
-            if output.strip() == expected_output:
+            if normalize_output(output).strip() == expected_output.strip():
                 result += "P"
                 total_P += 1
             elif error == "Time Limit Exceeded":
