@@ -14,17 +14,17 @@ async function displaySubmissions() {
 
   submissions.forEach((submission, index) => {
       const row = document.createElement('tr');
-      row.classList.add('hover:bg-gray-100', 'cursor-pointer');
+      row.classList.add('hover:bg-gray-100', 'cursor-pointer', 'dark:hover:bg-gray-900');
       row.onclick = () => showSubmissionDetails(submission);
       if (submission['score'] === 1) {
-        row.classList.remove('hover:bg-gray-100');
-        row.classList.add('bg-green-200', 'hover:bg-green-300');
+        row.classList.remove('hover:bg-gray-100', 'dark:hover:bg-gray-900');
+        row.classList.add('bg-green-200', 'hover:bg-green-300', 'dark:bg-green-700', 'dark:hover:bg-green-800');
       }
 
       const columns = ['submission', 'displayName', 'title', 'score', 'time'];
       columns.forEach((column) => {
           const cell = document.createElement('td');
-          cell.classList.add('py-2', 'px-4', 'border-b', 'text-center');
+          cell.classList.add('py-2', 'px-4', 'border-b', 'text-center', 'border-gray-300', 'dark:border-gray-600');
           if (column == 'score') cell.innerText = submission[column]*100;
           else cell.innerText = submission[column];
           if (column == 'time') cell.innerText += 'ms';
@@ -55,14 +55,21 @@ function showSubmissionDetails(data) {
         Average Memory Usage: <b>${data.avgmem.toFixed(2)}</b>kB
     `;
 
-    document.getElementById("submissionCode").innerText = data.source;
-    document.getElementById("submissionDetails").classList.remove('opacity-0', 'scale-0');
-    document.getElementById("submissionDetails").classList.add('opacity-100', 'scale-100');
+    const submissionCode = document.getElementById("submissionCode");
+    submissionCode.textContent = data.source;
+    submissionCode.classList.remove('language-c', 'language-cpp', 'language-py');
+    submissionCode.classList.add('language-' + data.lang.toLowerCase());
+    Prism.highlightElement(submissionCode);
+
+    const submissionDetails = document.getElementById("submissionDetails");
+    submissionDetails.classList.remove('scale-0');
+    submissionDetails.classList.add('scale-100');
 }
 
 function closeSubmissionDetails() {
-    document.getElementById("submissionDetails").classList.remove('opacity-100', 'scale-100');
-    document.getElementById("submissionDetails").classList.add('opacity-0', 'scale-0');
+    const submissionDetails = document.getElementById("submissionDetails");
+    submissionDetails.classList.remove('scale-100');
+    submissionDetails.classList.add('scale-0');
 }
 
 function sortTable() {

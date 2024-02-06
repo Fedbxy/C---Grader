@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>404 Not Found</title>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-700 dark:text-white">
+
+    <%- include('navbar', {active: "None"}) %>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8 flex-1 text-center">
+
+        <h1 class="text-4xl font-bold mb-4">404 - Not Found</h1>
+        <p class="text-gray-600 dark:text-gray-400 mb-8">The page you are looking does not exist.</p>
+        
+        <a href="/" class="text-blue-500 hover:underline">Go back to the home page</a>
+
+    </div>
+
+    <%- include('footer') %>
+
+</body>
+
+</html>

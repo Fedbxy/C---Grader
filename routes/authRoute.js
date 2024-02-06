@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         }
     }
 
-    res.sendFile(path.join(__dirname, '../private', 'index.html'));
+    res.render('index');
 });
 
 router.get('/submission', (req, res) => {
@@ -29,7 +29,7 @@ router.get('/submission', (req, res) => {
         }
     }
 
-    res.sendFile(path.join(__dirname, '../private', 'submission.html'));;
+    res.render('submission');
 });
 
 router.post('/register', async (req, res) => {
@@ -64,7 +64,7 @@ router.get('/login', (req, res) => {
     if (req.cookies.authToken && req.cookies.authToken !== 'undefined') {
         res.redirect('/login');
     } else {
-        res.sendFile(path.join(__dirname, '../private', 'login.html'));
+        res.render('login');
     }
 });
 
@@ -72,7 +72,7 @@ router.get('/register', (req, res) => {
     if (req.cookies.authToken) {
         res.redirect('/');
     } else {
-        res.sendFile(path.join(__dirname, '../private', 'register.html'));
+        res.render('register');
     }
 });
 

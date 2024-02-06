@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>OCOM Bruh</title>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-700 dark:text-white">
+
+    <%- include('navbar', {active: "Home"}) %>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8 flex-1">
+
+        <!-- Problems Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Problems</h2>
+
+            <div class="overflow-x-auto rounded-md">
+                <table id="problemTable" class="min-w-full bg-white dark:bg-gray-800">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600">ID</th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600">Title</th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600">Time Limit</th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600">Memory Limit</th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Problems should display here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>        
+
+    </div>
+
+    <%- include('footer') %>
+
+    <script src="/javascripts/authScript.js"></script>
+    <script src="/javascripts/script.js"></script>
+
+</body>
+
+</html>

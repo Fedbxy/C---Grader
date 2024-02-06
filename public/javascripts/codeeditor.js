@@ -1,4 +1,4 @@
-require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.44.0/min/vs' } });
+require.config({ paths: { 'vs': '/monaco-editor/min/vs' } });
 
 function loadEditor(initialCode) {
     codeEditor = monaco.editor.create(document.getElementById('code'), {

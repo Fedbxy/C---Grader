@@ -20,12 +20,15 @@ app.use((req, res, next) => {
     next();
 });
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 app.use('/api', apiRoutes);
 app.use(authRoutes);
-app.use(express.static(path.join(__dirname, 'public'), {extensions: 'html'}));
+app.use(express.static(path.join(__dirname, 'public'), {extensions: ['html', 'ejs'] }));
 
 app.get('/submit', authenticateToken, (req, res) => {
-    res.sendFile(path.join(__dirname, 'private', 'submit.html'));;
+    res.render('submit');
 });
 
 app.post('/submit', authenticateToken, (req, res) => {
@@ -38,7 +41,7 @@ app.post('/submit', authenticateToken, (req, res) => {
 });
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+    res.status(404).render('404');
 });
 
 app.use((err, req, res, next) => {

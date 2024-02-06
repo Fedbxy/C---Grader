@@ -21,21 +21,6 @@ function loginUser(username, password) {
     sendToServer(serverLoginEndpoint, loginData, 'Login');
 }
 
-function logout() {
-    fetch('/logout', {
-        method: 'GET',
-        credentials: 'same-origin',
-    })
-    .then(response => {
-        if (response.status === 200) {
-            showError('Logged out.');
-        }
-    })
-    .catch(error => {
-        console.error('Error during logout:', error);
-    });
-}
-
 function sendToServer(endpoint, data, action) {
     fetch(endpoint, {
         method: 'POST',
@@ -130,22 +115,13 @@ function clearError() {
 }
 
 function updateNavbar() {
-    const submitLink = document.getElementById('submitLink');
-    const submissionLink = document.getElementById('submissionLink');
     const loginLink = document.getElementById('loginLink');
   
     if (document.cookie.includes('isLoggedIn=true')) {
-        if (submitLink) submitLink.classList.remove('hidden');
-        if (submissionLink) submissionLink.classList.remove('hidden');
         if (loginLink) {
             loginLink.textContent = 'Logout';
-            loginLink.classList.add('text-red-500', 'font-semibold');
-            loginLink.onclick = logout;
-        }
-    } else {
-        if (submitLink) submitLink.classList.add('hidden');
-        if (loginLink) {
-            loginLink.textContent = 'Login';
+            loginLink.classList.add('text-red-500', 'dark:text-red-500');
+            loginLink.href = 'logout';
         }
     }
 }
