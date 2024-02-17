@@ -72,7 +72,7 @@ router.get('/submission', async (req, res) => {
 
             const title = (await Promise.all(titlePromises)).filter(item => item !== null).map(item => item.name)[0];
             
-            const { submission, userID, submission_date, score, verdict, time, avgmem } = JSON.parse(content);
+            const { submission, userID, submission_date, score, verdict, time, max_memory } = JSON.parse(content);
 
             const user = getUserData(userID);
 
@@ -83,7 +83,7 @@ router.get('/submission', async (req, res) => {
                 score,
                 verdict,
                 time,
-                avgmem,
+                max_memory,
                 source,
                 problemID,
                 title,

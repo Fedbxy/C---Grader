@@ -84,7 +84,7 @@ async function submitToServer(code, language, problem, submit_epoch, file_extent
         Score: <b>${Math.round(result.score * 100)}</b><br>
         Result: <b>${result.verdict}</b><br>
         Total time: <b>${result.time}</b>ms<br>
-        Average Memory Usage: <b>${result.avgmem.toFixed(2)}</b>kB
+        Memory Usage: <b>${result.max_memory.toFixed(2)}</b>kB
     `;
     setResult(resultMessage, false);
 }

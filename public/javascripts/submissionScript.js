@@ -52,7 +52,7 @@ function showSubmissionDetails(data) {
         Score: <b>${Math.round(data.score * 100)}</b><br>
         Result: <b>${data.verdict}</b><br>
         Total time: <b>${data.time}</b>ms<br>
-        Average Memory Usage: <b>${data.avgmem.toFixed(2)}</b>kB
+        Memory Usage: <b>${data.max_memory.toFixed(2)}</b>kB
     `;
 
     const submissionCode = document.getElementById("submissionCode");

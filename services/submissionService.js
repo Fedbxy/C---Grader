@@ -101,7 +101,7 @@ const processSubmission = (req, res, dir, callback) => {
                     return;
                 }
 
-                exec(`python3 grader/main.py`, (error, stdout, stderr) => {
+                exec(`python3 grader/judge.py`, (error, stdout, stderr) => {
                     if (error) {
                         console.error(`Error executing the code: ${error.message}`);
                         reject(`Error executing the code: ${error.message}`);
