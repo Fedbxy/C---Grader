@@ -25,7 +25,7 @@ async function displaySubmissions() {
       columns.forEach((column) => {
           const cell = document.createElement('td');
           cell.classList.add('py-2', 'px-4', 'border-b', 'text-center', 'border-gray-300', 'dark:border-gray-600');
-          if (column == 'score') cell.innerText = submission[column]*100;
+          if (column == 'score') cell.innerText = Math.round(submission[column] * 100);
           else cell.innerText = submission[column];
           if (column == 'time') cell.innerText += 'ms';
           row.appendChild(cell);
