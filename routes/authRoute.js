@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
     res.clearCookie('authToken');
-    res.clearCookie('isLoggedIn');
+    res.cookie('isLoggedIn', false);
     res.redirect('/login');
 });
 
