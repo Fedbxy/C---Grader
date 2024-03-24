@@ -3,16 +3,15 @@ import subprocess
 import time
 import json
 import psutil
-import signal
 
 def compile_code(language, code_file):
     try:
         if language == "c":
-            subprocess.run(["gcc", code_file, "-o", "grader/executable", "-std=c11", "-O2", "-Wall", "-lm", "-static", "-DONLINE_JUDGE"], check = True, stderr = subprocess.PIPE)
+            subprocess.run(["gcc", code_file, "-o", "grader/executable", "-std=c11", "-O2", "-lm", "-static"], check = True, stderr = subprocess.PIPE)
         elif language == "cpp":
-            subprocess.run(["g++", code_file, "-o", "grader/executable", "-std=c++14", "-O2", "-Wall", "-lm", "-static", "-DONLINE_JUDGE"], check = True, stderr = subprocess.PIPE)
+            subprocess.run(["g++", code_file, "-o", "grader/executable", "-std=c++14", "-O2", "-lm", "-static"], check = True, stderr = subprocess.PIPE)
     except subprocess.CalledProcessError as e:
-        print(f"Compilation error")
+        print(f"Compilation error:\n{e.stderr}")
         return False
     return True
 
@@ -40,7 +39,7 @@ def run_code(code_file, input_file, time_limit, memory_limit, language):
         stdout, stderr = process.communicate(timeout=time_limit)
         execution_time = round((time.time() - start_time) * 1000)
 
-        if process.returncode == -signal.SIGSEGV:
+        if process.returncode != 0:
             return "", "Runtime Error", execution_time, memory_usage
 
         return stdout, stderr, execution_time, memory_usage
