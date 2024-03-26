@@ -23,7 +23,7 @@ async function displayProblem() {
                     titleCell.textContent = problem.title;
 
                     let second = 'second';
-                    if (problem.time_limit > 1) second = 'seconds';
+                    if (problem.time_limit != 1) second = 'seconds';
 
                     // Time Limit
                     const timeLimitCell = document.createElement('td');
