@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <title>Submissions</title>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-700 dark:text-white">
+
+    <%- include('navbar', {active: "Submissions"}) %>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8 flex-1">
+
+        <!-- Submissions Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Submissions</h2>
+
+            <!-- Submissions Table -->
+            <div class="overflow-x-auto rounded-md">
+                <table class="min-w-full bg-white dark:bg-gray-800" id="submissionTable">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600"> # </th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600"> Name </th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600"> Problem </th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600"> Score </th>
+                            <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-600"> Total Time </th>
+                        </tr>
+                    </thead>
+                    <tbody id="submissionTableBody">
+                        <!-- Submissions should display here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Submission Details Card -->
+    <div id="submissionDetails" class="fixed top-0 left-0 w-full h-full bg-gray-100 dark:bg-gray-700 p-8 rounded-md shadow-md scale-0 overflow-hidden transition-transform duration-100 ease-in-out flex flex-col overflow-y-auto">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold" id="submissionTitle"></h3>
+            <div class="text-right cursor-pointer" onclick="closeSubmissionDetails()">&times;</div>
+        </div>
+        <p class="mb-2" id="submissionDetailsContent"></p>
+        <pre class="rounded-md overflow-y-auto"><code id="submissionCode"></code></pre>
+    </div>
+
+    <%- include('footer') %>
+
+    <script src="/javascripts/prism.js"></script>
+    <script src="/javascripts/submissionScript.js"></script>
+    <script src="/javascripts/authScript.js"></script>
+</body>
+
+</html>

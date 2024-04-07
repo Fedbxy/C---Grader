@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Register - OCOM Bruh</title>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-700 dark:text-white flex flex-col min-h-screen">
+
+    <%- include('navbar', {active: "None"}) %>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8 flex-1">
+
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-md shadow-md w-full max-w-md mx-auto">
+            <h1 class="text-3xl font-bold mb-4 text-center">Register</h1>
+
+            <div class="mb-4">
+                <label for="displayName" class="block text-sm font-medium text-gray-700 dark:text-white">Display Name:</label>
+                <input type="text" id="displayName" name="displayName" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700">
+            </div>
+
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700 dark:text-white">Username:</label>
+                <input type="text" id="username" name="username" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700">
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700 dark:text-white">Password:</label>
+                <input type="password" id="password" name="password" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700">
+            </div>
+
+            <button onclick="validateRegisterForm()" type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 w-full">Register</button>
+
+            <p id="error-message" class="text-red-500 mt-4 text-center"></p>
+        </div>
+
+        <section class="mt-8 text-center">
+            <p>Already have an account? <a href="login" class="text-blue-500 hover:underline">Login here</a>.</p>
+        </section>
+
+    </div>
+
+    <%- include('footer') %>
+
+    <script src="/javascripts/authScript.js"></script>
+
+</body>
+
+</html>

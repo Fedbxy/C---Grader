@@ -1,0 +1,14 @@
+<header class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-lg font-semibold">OCOM Bruh</a>
+        
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="/" class="hover:text-blue-500 <%if(active=="Home"){%>font-bold<%}%>" id="homeLink">Problems</a></li>
+                <li><a href="/submit" class="hover:text-blue-500 <%if(active=="Submit"){%>font-bold<%}%>" id="submitLink">Submit</a></li>
+                <li><a href="/submission" class="hover:text-blue-500 <%if(active=="Submissions"){%>font-bold<%}%>" id="submissionLink">Submissions</a></li>
+                <li><a href="/login" class="hover:text-blue-500 <%if(active=="Login"){%>font-bold<%}%>" id="loginLink">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

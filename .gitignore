@@ -1,3 +1,10 @@
-c++
-__pycache__
+node_modules
+package-lock.json
 .vscode
+closed_problems
+archives
+submission
+testcases
+problem
+.DS_Store
+monaco-editor
