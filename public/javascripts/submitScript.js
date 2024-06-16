@@ -165,6 +165,10 @@ async function displayProblemSelection() {
     try {
         const response = await fetch('/api/problem');
         const problem = await response.json();
+        
+        problem.sort((a, b) => {
+            return a.filename.localeCompare(b.filename);
+        });
 
         problem.forEach(problem => {
             const option = document.createElement('option');
