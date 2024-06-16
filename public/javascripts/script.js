@@ -54,9 +54,38 @@ async function displayProblem() {
                     tbody.appendChild(row);
                 }
             });
+
+            sortTable();
         }
     } catch (error) {
         console.error('Error fetching problem:', error);
+    }
+}
+
+function sortTable() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("problemTable");
+    switching = true;
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+
+        for (i = 1; i < rows.length - 1; i++) {
+            shouldSwitch = false;
+            x = parseFloat(rows[i].cells[0].innerHTML.split('-')[1]);
+            y = parseFloat(rows[i + 1].cells[0].innerHTML.split('-')[1]);
+
+            if (x > y) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
     }
 }
 
